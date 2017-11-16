@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+  "use strict";
   //changes color of box mouse is hovering over to light gray
   /**$('.front').hover(function() {
     $(this).css('background','#889da0');
@@ -7,11 +7,14 @@ $(document).ready(function() {
   function() {
     $(this).css('background','#2e3d49');
   }); */
-  var cardPics, clickCheck, cardChild, refreshPage,
+  var cardPics, clickCheck, cardChild, refreshPage, start,
+
       cardPics = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf',
 				  'fa fa-bicycle', 'fa fa-bomb','fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube',
  				  'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'],
       chosenCard = $('.card'),
+      start = $('.start'),
+      cardChild = chosenCard.children(),
       //flips card over to reveal image
       clickCheck = $('.front').click(function() {
         $(this).toggleClass('front');
@@ -22,38 +25,37 @@ $(document).ready(function() {
         location.reload(true);
       });
 
-      // Shuffle function from http://stackoverflow.com/a/2450976
-      function shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
+  // Shuffle function from http://stackoverflow.com/a/2450976
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        return array;
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
     }
 
-    startGame = $('.start').click(function() {
-      var shuffledCards = shuffle(cardPics);
+    return array;
+  }
 
-      $('.card').each(function() {
-        $(this).removeClass(this.children());
-        $(this).addClass("<i class=" + shuffledCards[0] + "></i>");
-        shuffledCards = shuffledCards.splice(0,1);
+  //Uses start button to shuffle cards
+  function startGame() {
+    start.click(function() {
+      shuffle(cardPics);
+      chosenCard.removeClass();
+      chosenCard.each(function(index) {
+        $(this).addClass(cardPics[index]);
+        index++;
       });
+
     });
-  /**function startGame() {
-    //start game by shuffling cards
-    var shuffledCards = shuffle(cardPics);
-    cardChild.each(function() {
-      cardChild.removeClass();
-      cardChild.append("<i class=" + index[0] "></i>");
-      shufflecards = shuffledCards.splice(0,1);
-  });*/
+  };
 
 
+
+
+
+startGame();
 });
