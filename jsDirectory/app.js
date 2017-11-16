@@ -42,14 +42,11 @@ $(document).ready(function() {
 
   //Uses start button to shuffle cards
   function startGame() {
-    start.click(function() {
       shuffle(cardPics);
-      chosenCard.removeClass();
-      chosenCard.each(function(index) {
+      cardChild.removeClass();
+      cardChild.each(function(index) {
         $(this).addClass(cardPics[index]);
         index++;
-      });
-
     });
   };
 
