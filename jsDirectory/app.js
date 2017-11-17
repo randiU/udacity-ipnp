@@ -16,10 +16,10 @@ $(document).ready(function() {
       start = $('.start'),
       cardChild = chosenCard.children(),
       //flips card over to reveal image
-      clickCheck = $('.front').click(function() {
+      /*clickCheck = $('.front').click(function() {
         $(this).toggleClass('front');
         $(this).toggleClass('open');
-      }),
+      }),*/
       //refreshes page
       refreshPage = $("button").click(function() {
         location.reload(true);
@@ -42,6 +42,7 @@ $(document).ready(function() {
 
   //Uses start button to shuffle cards
   function startGame() {
+    //starts by shuffling cards
       shuffle(cardPics);
       cardChild.removeClass();
       cardChild.each(function(index) {
@@ -50,9 +51,45 @@ $(document).ready(function() {
     });
   };
 
+  function clickAndCompare() {
+    var firstClick = "no";
+    var secondClick = "no";
+    var clickMatchCount = 0;
+    if (clickMatchCount === 0) {
+      $('.front').click(function() {
+        $(this).toggleClass('front');
+        $(this).toggleClass('open');
+
+      firstClick = (this);
+      clickMatchCount += 1;
+      console.log(firstClick);
+      console.log(clickMatchCount);
+      });
+    };
+    if (clickMatchCount === 1) {
+      $('.front').click(function() {
+        $(this).toggleClass('front');
+        $(this).toggleClass('open');
+
+      secondClick = (this);
+      clickMatchCount += 1;
+      console.log(secondClick);
+      console.log(clickMatchCount);
+      });
+    };
+    /*if (firstClick === secondClick) {
+      firstClick.freeze(obj);
+      secondClick.freeze(obj);
+      console.log(firstClick);
+      console.log(secondClick);
+    };*/
+    console.log(firstClick);
+    console.log(secondClick);
+  };
 
 
 
 
 startGame();
+clickAndCompare();
 });
